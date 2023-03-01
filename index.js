@@ -1,66 +1,69 @@
-let books = JSON.parse(localStorage.getItem('books')) || [];
-const booksSection = document.querySelector('.books');
+import { books } from './modules/book.js';
+import { dateTimefun } from './modules/dateTime.js';
 
-class Book {
-  constructor(id, title, author, isComplete = false) {
-    this.id = id;
-    this.title = title;
-    this.author = author;
-    this.isComplete = isComplete;
-  }
+// const books = JSON.parse(localStorage.getItem('books')) || [];
+// const booksSection = document.querySelector('.books');
 
-  createEl() {
-    const bookEl = document.createElement('li');
-    bookEl.setAttribute('id', this.id);
+// class Book {
+//   constructor(id, title, author, isComplete = false) {
+//     this.id = id;
+//     this.title = title;
+//     this.author = author;
+//     this.isComplete = isComplete;
+//   }
 
-    const divEl = document.createElement('div');
-    divEl.classList.add('d-flex', 'justify-content-between');
+//   createEl() {
+//     const bookEl = document.createElement('li');
+//     bookEl.setAttribute('id', this.id);
 
-    const divInner = document.createElement('div');
-    divInner.classList.add('d-flex');
+//     const divEl = document.createElement('div');
+//     divEl.classList.add('d-flex', 'justify-content-between');
 
-    const titleEl = document.createElement('p');
-    titleEl.textContent = this.title;
-    divInner.appendChild(titleEl);
+//     const divInner = document.createElement('div');
+//     divInner.classList.add('d-flex');
 
-    const spaceEl = document.createElement('p');
-    spaceEl.classList.add('span');
-    spaceEl.innerHTML = '&nbsp;by&nbsp;';
-    divInner.appendChild(spaceEl);
+//     const titleEl = document.createElement('p');
+//     titleEl.textContent = this.title;
+//     divInner.appendChild(titleEl);
 
-    const authorEl = document.createElement('p');
-    authorEl.textContent = this.author;
-    divInner.appendChild(authorEl);
+//     const spaceEl = document.createElement('p');
+//     spaceEl.classList.add('span');
+//     spaceEl.innerHTML = '&nbsp;by&nbsp;';
+//     divInner.appendChild(spaceEl);
 
-    divEl.appendChild(divInner);
+//     const authorEl = document.createElement('p');
+//     authorEl.textContent = this.author;
+//     divInner.appendChild(authorEl);
 
-    const deleteButtonEl = document.createElement('button');
-    deleteButtonEl.classList.add('remove-book', 'btn', 'btn-outline-light');
-    deleteButtonEl.textContent = 'Remove';
-    deleteButtonEl.setAttribute('data-book-id', this.id);
-    divEl.appendChild(deleteButtonEl);
+//     divEl.appendChild(divInner);
 
-    bookEl.appendChild(divEl);
-    const hrline = document.createElement('hr');
-    bookEl.appendChild(hrline);
+//     const deleteButtonEl = document.createElement('button');
+//     deleteButtonEl.classList.add('remove-book', 'btn', 'btn-outline-light');
+//     deleteButtonEl.textContent = 'Remove';
+//     deleteButtonEl.setAttribute('data-book-id', this.id);
+//     divEl.appendChild(deleteButtonEl);
 
-    booksSection.appendChild(bookEl);
-  }
+//     bookEl.appendChild(divEl);
+//     const hrline = document.createElement('hr');
+//     bookEl.appendChild(hrline);
 
-  static addBook(title, author) {
-    const book = new Book(new Date().getTime(), title, author);
-    books.push(book);
-    localStorage.setItem('books', JSON.stringify(books));
-    book.createEl();
-  }
+//     booksSection.appendChild(bookEl);
+//   }
 
-  static removeBook(bookId) {
-    books = books.filter((book) => book.id !== parseInt(bookId, 10));
-    localStorage.setItem('books', JSON.stringify(books));
-    const bookEl = document.getElementById(bookId);
-    bookEl.remove();
-  }
-}
+//   static addBook(title, author) {
+//     const book = new Book(new Date().getTime(), title, author);
+//     books.push(book);
+//     localStorage.setItem('books', JSON.stringify(books));
+//     book.createEl();
+//   }
+
+//   static removeBook(bookId) {
+//     books = books.filter((book) => book.id !== parseInt(bookId, 10));
+//     localStorage.setItem('books', JSON.stringify(books));
+//     const bookEl = document.getElementById(bookId);
+//     bookEl.remove();
+//   }
+// }
 
 const titleInput = document.querySelector('#title');
 const authorInput = document.querySelector('#author');
@@ -88,34 +91,34 @@ booksSection.addEventListener('click', (event) => {
   }
 });
 
-function dateTimefun() {
-  const weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  const date = new Date();
-  const hrs = date.getHours();
-  let min = date.getMinutes();
-  let sec = date.getSeconds();
-  const realDate = date.getDate();
-  const month = months[date.getMonth()];
-  const year = date.getFullYear();
-  const week = weekday[date.getDay()];
+// function dateTimefun() {
+//   const weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+//   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+//   const date = new Date();
+//   const hrs = date.getHours();
+//   let min = date.getMinutes();
+//   let sec = date.getSeconds();
+//   const realDate = date.getDate();
+//   const month = months[date.getMonth()];
+//   const year = date.getFullYear();
+//   const week = weekday[date.getDay()];
 
-  if (min < 10) {
-    min = `0${min}`;
-  }
+//   if (min < 10) {
+//     min = `0${min}`;
+//   }
 
-  if (sec < 10) {
-    sec = `0${sec}`;
-  }
+//   if (sec < 10) {
+//     sec = `0${sec}`;
+//   }
 
-  document.querySelector('.hours').innerHTML = hrs;
-  document.querySelector('.minutes').innerHTML = min;
-  document.querySelector('.seconds').innerHTML = sec;
-  document.querySelector('.weekDay').innerHTML = week;
-  document.querySelector('.date').innerHTML = realDate;
-  document.querySelector('.day').innerHTML = month;
-  document.querySelector('.year').innerHTML = year;
-}
+//   document.querySelector('.hours').innerHTML = hrs;
+//   document.querySelector('.minutes').innerHTML = min;
+//   document.querySelector('.seconds').innerHTML = sec;
+//   document.querySelector('.weekDay').innerHTML = week;
+//   document.querySelector('.date').innerHTML = realDate;
+//   document.querySelector('.day').innerHTML = month;
+//   document.querySelector('.year').innerHTML = year;
+// }
 
 setInterval(dateTimefun, 10);
 
